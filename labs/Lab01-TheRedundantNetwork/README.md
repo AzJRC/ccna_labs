@@ -1,5 +1,7 @@
 # Lab 01 - The Redundant Network
 
+![Screenshoot of the Packet Tracer Lab](LAB_PREVIEW.png "The Redundant Network")
+
 This lab includes essential networking concepts for the CCNA certification. It covers a range of topics including VLAN configuration, Hot Standby Router Protocol (HSRP) for gateway redundancy, Rapid Spanning Tree Protocol (RSTP) for Layer 2 loop prevention, Link Aggregation Groups (LAG) for increased bandwidth and redundancy, and OSPF for dynamic routing.
 The network topology features multiple VLANs, redundant links, and point-to-point connections, simulating a real-world environment that requires both Layer 2 and Layer 3 networking knowledge. Through this lab, users will gain practical experience in configuring and troubleshooting these technologies, ensuring a solid understanding of how they interoperate to create a resilient and efficient network.
 
@@ -48,3 +50,21 @@ Consider the following order to configure the devices, which can help you simpli
 ## Step-by-Step Guide
 
 (TODO)
+
+## Commands You Should Known
+
+### Routers
+
+(TODO)
+
+### Switches
+
+(TODO)
+
+### Other devices
+
+(TODO)
+
+## Known errors and bugs
+
+1. When enabling Rapid Spanning Tree Protocol (RSTP), Packet Tracer seems to behave strangely, blocking interfaces that it shouldn't. To solve this issue save and close the application and open it again.
