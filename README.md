@@ -6,11 +6,11 @@ These are my own CCNA practice labs that I have been creating during my time stu
 
 The following table summarizes the current labs available in the repository.
 
-| Lab Number 	| Lab Name              	| Description                                                     	|
-|------------	|-----------------------	|-----------------------------------------------------------------	|
-| 1          	| The Redundant Network 	| The LAB involves configuring VLANs, HSRP, RSTP, LACP, and OSPF. 	|
-| 2          	| -                      	| -                                                                	|
-| 3          	| -                     	| -                                                               	|
+| Lab Number | Lab Name | Brief Description |
+|--- |--- |---|
+| 1 | The Redundant Network | Configuration of VLANs, HSRP, RSTP, LACP, and OSPF. 	            |
+| 2 | Restricted Dynamic Network | Configuration of Dynamic Routing Protocols (OSPF, EIGRP, RIP), ACLs, and VLANs|
+| 3 (SOON) | Remotely Managed Network | Configure console and SSH lines. Configure networking protocols such as NTP, DNS, DHCP, SNMP, Syslog, etc. |
 
 ## How can I help?
 
