@@ -49,6 +49,14 @@ This lab convers the following requirements in the CCNA Exam Topics List:i
 | `switchport mode trunk` 	| Interface Configuration 	| Configures the interface to operate in trunk mode. 	|
 | `encapsulation dot1Q {vid}` 	| Subinterface Configuration 	| Configured IEEE 802.1Q encapsulation with a specified VLAN on a subinterface. 	|
 
+## Verify your solution
+
+Use the following checklist to verify your solution:
+
+1. (TODO)
+
+**The checklist only verifies some parts of the lab and is not exhaustive.*
+
 ## Known errors and bugs
 
 No known errors/bugs yet.

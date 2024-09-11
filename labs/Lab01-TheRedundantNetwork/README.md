@@ -7,7 +7,20 @@ The network topology features multiple VLANs, redundant links, and point-to-poin
 
 ## Relevant CCNA Exam Topics
 
-(TODO)
+This lab convers the following requirements in the CCNA Exam Topics List:
+
+- **Network Fundamentals**
+    - Explain the role and function of network components
+    - Configure and verify IPv4
+- **Network Access**
+    - Configure and verify VLANs
+    - Configure and verify interswitch connectivity
+    - Configure and verify EtherChannel (LACP)
+    - Interpret basic operations of Rapid PVST+ Spanning Tree Protocol
+- **IP Connectivity**
+    - Configure and verify IPv4 static routing
+    - Configure and verify single area OSPFv2
+    - Describe the purpose, function, and concepts of first hop redundancy protocols (FHRP)
 
 ## Commands You Should Known
 
@@ -55,6 +68,51 @@ Here you have all the commands you will need to complete this lab.
 | **spanning-tree portfast bpduguard default** | Global Configuration | Enables BPDU Guard on all PortFast-enabled ports, automatically disabling a port if a BPDU is received. |
 | **spanning-tree vlan {vlan-id} root primary** | Global Configuration | Sets the spanning tree priority for VLAN {vlan-id} to a lower value than the current root bridge, influencing the election of the root bridge. |
 
+## Verify your solution
+
+Use the following checklist to verify your solution:
+
+1. Issue the command `show etherchannel summary` in the L2 and L3 switches in Zone A and verify that:
+    - MLS1 has two PortAggregated interfaces: Po1 (Fa0/3 and Fa0/4) and Po2 (Fa0/5 and Fa0/6).
+    - S1 has two PortAggregated interfaces: Po1 (Fa0/2 and Fa0/3) and Po2 (Fa0/5 and Fa0/6).
+    - S2 has one PortAggregated interfaces: Po1 (Fa0/2 and Fa0/3).
+    - S3 has one PortAggregated interfaces: Po1 (Fa0/3 and Fa0/4).
+    - All PortChannel interfaces use LACP and are "Layer 2, In use" (SU).
+2. Issue the command `show interfaces status` in the L2 and L3 switches in Zone A and verify that:
+    - All links between switches are trunk ports. For example, all the connected interfaces in MLS1 except Gig0/2 should be trunk links.
+    - All links that connect to an end host should be access ports. For example, the port Fa0/1 in S2 should be assigned to VLAN20, and the remaining connected ports should be trunks.
+3. Issue the command `show interfaces trunk` in the L2 and L3 switches in Zone A and verify that:
+    - All switches except S3 have configured an unused VLAN number (e.g. 4001) as their Native vlan in all ports.
+    - S3 is the only switch that has VLAN10 configured as the Native VLAN in Gig0/1.
+4. Issue the command `show spanning-tree vlan {vlan-number}` in the L2 switches in Zone A and verify that:
+    - S1's ports in VLAN10 must be all designated ports in a forwarding state.
+    - S2's ports in VLAN20 must be all designated ports in a forwarding state.
+    - S3's ports in VLAN30 must be all designated ports in a forwarding state.
+5. Ping PC 192.168.1.2 in VLAN10 from PC 192.168.1.1 in VLAN10 and verify that:
+    - The ICMP process is completed successfully.
+    - The ICMP packets are never routed.
+6. Ping PC 192.168.1.9 in VLAN20 from PC 192.168.1.1 in VLAN10 and verify that:
+    - The ICMP process is completed successfully (First ping may fail due to ARP).
+    - ICMP echo-request packets are inter-vlan routed by R2.
+    - ICMP echo-reply packets are inter-vlan routed by MLS1.
+7. Ping PC 192.168.1.17 in VLAN30 from PC 192.168.1.9 in VLAN20 and verify that:
+    - The ICMP process is completed succesfully (First ping may fail due to ARP).
+    - ICMP echo-request packets are inter-vlan routed by MLS1.
+    - ICMP echo-reply packets are inter-vlan routed by R2.
+8. Issue the command `show ip route` in at least 3 routers in the network and verify that:
+    - There are routes to any portion of the network.
+    - There are either three OSPF routes or three connected routes to Zone A's subnetworks.
+    - There is either an OSPF route or a connected route to Zone B.
+9. Ping Server in Zone B from each PC in Zone A and verify:
+    - The ICMP process is completed succesfully (First ping may fail due to ARP).
+    - ICMP echo-requests from PCs in VLAN10 are routed by R2.
+    - ICMP echo-requests from PC in VLAN20 are routed by MLS1.
+    - ICMP echo-requests from PC in VLAN30 are routed by R2.
+    - ICMP echo-replies should be load-balanced and should enter Zone A either via MLS1 or R2.
+
+**The checklist only verifies some parts of the lab and is not exhaustive.*
+
 ## Known errors and bugs
 
 1. When enabling Rapid Spanning Tree Protocol (RSTP), Packet Tracer seems to behave strangely, blocking interfaces that it shouldn't. To solve this issue save and close the application and open it again.
+2. Configuring the Link Aggregated Group links as Point-to-Point links in the spanning tree protocol configuration may generate issues in the designation of port roles and status.
