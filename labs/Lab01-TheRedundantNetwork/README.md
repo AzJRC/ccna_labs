@@ -112,6 +112,46 @@ Use the following checklist to verify your solution:
 
 **The checklist only verifies some parts of the lab and is not exhaustive.*
 
+# Trivia Challenge
+
+Here are some questions about the lab thay may help you study what learned in the activity. **Ensure that you have succesfully completed the lab and that you satisfy every aspect in the checklist,** or you may encounter issues while answering the trivia challenge.
+
+**Be careful when you click the questions or the answer will be shown.*
+
+<div style="background-color:black; padding: 1rem 0.5rem">
+    <details>
+    <summary>Q1: If you trace the route of the packets from PC in VLAN20 several times using the command <code>tracert 172.16.100.1</code> you will notice that the packets use a different route. Can you figure out why this occur?</summary>
+    <br>
+    You may have noticed that both R3 and R5 have several possible options to route traffic. The trick here is to remember that OSPF will load balance between as many equal-cost paths (ECMP) there are available. For instance, in R3, if you issue the command <code>`show ip route`</code>, you will discover that the routing table has actually two entries for the network 172.16.100.1/30.
+    </details>
+    <br><br>
+    <details>
+    <summary>Q2: If you try the same task in remaining VLANs you will notice that the route of the packets is the same. Can you tell why?</summary>
+    <br>
+    VLAN 10 uses only R2 as its default gateway, and VLAN 30, altough it is using HSRP, the gateway that has higher priority is R2. If you check the routing table in R2 you will find that there is only one route to 172.16.100.1.
+    By the way, if you try a ping instead of a tracert, you will notice that the ICMP echo replies are being load balanced as expected!
+    </details>
+    <br><br>
+    <details>
+    <summary>Q3: Disable OSPF on R2 using <code>no router ospf {pid}</code>. Without viewing the routing table, can you infeer which hop will always be in the path of the traffic originated in Zone A? Do not consider the reply and assume both HSRP gateways are up!</summary>
+    <br>
+    In step 5.2 you configured a floating static route to the network 172.16.100.0/30 through R3. If you issue the ping command in the PCs in VLAN10 or VLAN30, the traffic will be routed by R2 and it will use the floating static route we configured earlier! Traffic originated from VLAN20 will still use the MLS1 as its default gateway and will pass also through R3.
+    </details>
+    <br><br>
+    <details>
+    <summary>Q4: destroy the MLS1 by removing it from the topology! What would be the implications of this? Try pinging the remote network and see what happen. Try to infeer the reason of the result of your pring probes!</summary>
+    <br>
+    We expect that if the Hot Standby Routing Protocol was configured correctly, every end device should be able to still route their traffic to Zone B.
+    If you have ping the server in Network B and it didn't work, you may have forgot enable OSPF in the subinterfaces of R2!
+    </details>
+    <br><br>
+    <details>
+    <summary>Extra: Can you think a reason why would you want to configure HSRP in MANY VLANs and not ALL VLANs?</summary>
+    <br>
+    There is no specific answer for this question; however, in my experience I once worked in a company where they had a setup like this! I am not sure about the reasons of why they decided to do that, but apparently was a security measure to avoid having to many entry points for that particular network. It turns out that they had some critical networking devices and servers in that particular subnetwork that did not really need to access the internet at all.
+    </details>
+</div>
+
 ## Known errors and bugs
 
 1. When enabling Rapid Spanning Tree Protocol (RSTP), Packet Tracer seems to behave strangely, blocking interfaces that it shouldn't. To solve this issue save and close the application and open it again.

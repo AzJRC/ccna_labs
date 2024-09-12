@@ -57,6 +57,21 @@ Use the following checklist to verify your solution:
 
 **The checklist only verifies some parts of the lab and is not exhaustive.*
 
+# Trivia Challenge
+
+Here are some questions about the lab thay may help you study what learned in the activity. **Ensure that you have succesfully completed the lab and that you satisfy every aspect in the checklist,** or you may encounter issues while answering the trivia challenge.
+
+**Be careful when you click the questions or the answer will be shown.*
+
+<div style="background-color:black; padding: 1rem 0.5rem">
+    <details>
+    <summary>Q1:</summary>
+    <br>
+    Answer
+    </details>
+    <br><br>
+</div>
+
 ## Known errors and bugs
 
 No known errors/bugs yet.
